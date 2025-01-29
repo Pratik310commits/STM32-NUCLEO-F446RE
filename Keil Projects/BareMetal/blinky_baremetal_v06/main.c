@@ -1,4 +1,10 @@
 #include <stdint.h>
+/****
+
+// Delay is implemented as blocking loop but Systic is used
+// instead of crude loop
+
+****/
 
 #define RCC_BASE        0x40023800U  // RCC Base Address
 #define GPIOA_BASE      0x40020000U  // GPIOA Base Address
