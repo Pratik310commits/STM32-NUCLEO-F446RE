@@ -103,6 +103,16 @@ void delay_blocking(long delay)
 }
 
 // Blocking delay using SysTick Timer
+/*** 
+
+// checks if the 16th bit (COUNTFLAG) is set, 
+// which means that the SysTick timer has finished its countdown (i.e., one full cycle has passed) 
+// The CTRL flag is set to 1 after the SysTick timer reaches zero. 
+// It indicates that the timer has counted down from the value in LOAD to zero
+// LOAD is set to 15999, so CTRL will set very 1ms
+// the loop will runn ms milliseconds
+
+***/
 void delay_ms(uint32_t ms) {
     for (uint32_t i = 0; i < ms; i++) {
         while (!(SysTick->CTRL & (1U << 16)));  // Wait for COUNTFLAG
