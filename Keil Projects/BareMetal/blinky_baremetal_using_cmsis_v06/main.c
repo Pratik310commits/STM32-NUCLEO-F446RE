@@ -27,19 +27,19 @@ int main()
 void setup_mcu()
 {
     // Enable HSI (High-Speed Internal) clock
-    RCC->CR |= (0x01U << 0); // Set HSION bit (Bit 0) in the Clock Control Register (CR)
+    RCC->CR |= RCC_CR_HSION; // Set HSION bit (Bit 0) in the Clock Control Register (CR)
     
     // Enable GPIOA peripheral clock
-    RCC->AHB1ENR |= (0x01U << 0); // Set Bit 0 in AHB1ENR (AHB1 peripheral clock enable register)
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; // Set Bit 0 in AHB1ENR (AHB1 peripheral clock enable register)
 
     // Set PA5 as General Purpose Output Mode
-    GPIOA->MODER |= (0x01U << 10); // Set bits 10-11 (01: General purpose output mode)
+    GPIOA->MODER |= GPIO_MODER_MODE5_0; // Set bits 10-11 (01: General purpose output mode)
 
     // Set GPIOA Output Type as Push-Pull (Default)
-    GPIOA->OTYPER = 0x0;
+    GPIOA->OTYPER &= ~GPIO_OTYPER_OT5;
 
     // Set GPIOA Output Speed as Low Speed (Default)
-    GPIOA->OSPEEDR = 0x0;
+    GPIOA->OSPEEDR &= ~GPIO_OSPEEDR_OSPEED5;
 }
 
 // Function to create a simple delay loop
